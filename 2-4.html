@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Data Binding with knockoutJs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+</head>
+<body>
+    <button type="submit" data-bind="text:(id == 0) ? 'Create': 'Update', click:update"></button>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-debug.js"> </script>
+    <script>
+   var viewModel = function(){
+       var self = this;
+       self.id = ko.observable();
+       self.id = 0
+       console.log(ko.toJS(self.id));
+       self.update = function (){
+           self.id = self.id + 1;
+           console.log(ko.toJS(self.id));
+       }
+   }
+    ko.applyBindings(viewModel);
+    </script>
+</body>
+</html>
+
