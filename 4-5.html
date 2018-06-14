@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Data Binding with knockoutJs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+</head>
+<body>
+    <span data-bind="text:pureComputedFullName()"></span>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-debug.js"> </script>
+    <script>
+    function ViewModel(){
+        var self = this;
+        self.firstName = ko.observable('Steve');
+        self.lastName = ko.observable('Kennedy');
+        self.pureComputedExecutions = 0;
+        self.computedExecutions = 0;
+
+        self.pureComputedFullName = ko.pureComputed(function(){
+            //This is not recommended
+            self.pureComputedExecutions++;
+            return 'Hello ' + self.firstName() + ' ' + self.lastName();
+        });
+
+        self.computedFullName = ko.computed(function(){
+            self.computedExecutions++;
+            return 'Hello ' + self.firstName() + ' ' + self.lastName();
+        });
+    };
+    var viewModel = new ViewModel();
+    ko.applyBindings(viewModel);
+    alert('Pure computed executions: ' + viewModel.pureComputedExecutions);
+    alert(' computed executions: ' + viewModel.computedExecutions);
+    </script>
+</body>
+</html>
+
