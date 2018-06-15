@@ -18,9 +18,7 @@
     <script>
     function ViewModel(){
         var self = this;
-
         self.showExtraData = ko.observable(false);
-
         self.updateObservable = function(){
             self.showExtraData(!self.showExtraData());
         };
