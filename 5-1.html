@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Data Binding with knockoutJs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+</head>
+<body>
+    <textarea data-bind="textInput: myText"></textarea>
+    Characters remaining: <span data-bind="text: charactersRemaining"></span>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-debug.js"> </script>
+    <script>
+    function ViewModel(){
+        var self = this;
+        self.myText = ko.observable('');
+        self.maxCharacters = 140;
+
+       self.charactersRemaining = ko.computed(function(){
+           return self.maxCharacters - self.myText().length;
+       });
+    };
+    var viewModel = new ViewModel();
+    ko.applyBindings(viewModel);
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Data Binding with knockoutJs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <img id="current_book" />
+	
+	<ul>
+		<!-- ko foreach: books -->
+		<li data-bind="text: title, event: { mouseover: $parent.loadImage }"></li>
+		<!-- /ko -->
+	</ul>
+  
+</head>
+<body>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-debug.js"> </script>
+    <script>
+    function ViewModel(){
+        var self = this;
+        self.books = [
+				{
+					title: 'Rapid Application Development With CakePHP',
+					image: 'http://ecx.images-amazon.com/images/I/41JC54HEroL._AA160_.jpg'
+				},
+				{
+					title: '20 Recipes for Programming MVC 3: Faster, Smarter Web Development', 
+					image: 'http://ecx.images-amazon.com/images/I/51LpqnDq8-L._AA160_.jpg'
+				},
+				{
+					title: '20 Recipes for Programming PhoneGap: Cross-Platform Mobile Development for Android and iPhone', 
+					image: 'http://ecx.images-amazon.com/images/I/51AkFkNeUxL._AA160_.jpg'
+				}
+			];
+
+            self.loadImage = function(data, event){
+                $('#current_book').attr('src', data.image);
+            }
+    }
+    var viewModel = new ViewModel();
+    ko.applyBindings(viewModel);
+    </script>
+</body>
+</html>
+
